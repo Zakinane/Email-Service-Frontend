@@ -1,0 +1,28 @@
+.login-container {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container input {
+  padding: 8px;
+  margin: 5px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.login-container input:focus {
+  border-color: #4cafef;
+  outline: none;
+}
+
+.login-container button {
+  margin-top: 10px;
+}

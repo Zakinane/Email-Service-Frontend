@@ -1,0 +1,69 @@
+.sendform-container {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 350px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.sendform-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.sendform-container input,
+.sendform-container textarea {
+  padding: 8px;
+  margin: 5px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.sendform-container input:focus,
+.sendform-container textarea:focus {
+  border-color: #4cafef;
+  outline: none;
+}
+
+.sendform-container button {
+  margin-top: 10px;
+}
+
+.sendform-container p {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* l'enveloppe */
+.mail-animation {
+  position: absolute;
+  top: -40px;
+  left: -60px;
+  font-size: 30px;
+  opacity: 0;
+}
+
+.mail-fly {
+  animation: flyMail 1.5s ease-in-out;
+}
+
+@keyframes flyMail {
+  0% {
+    left: -60px;
+    top: -40px;
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+  50% {
+    top: -60px;
+    opacity: 1;
+  }
+  100% {
+    left: 120%;
+    top: -40px;
+    opacity: 0;
+    transform: rotate(20deg);
+  }
+}
+

@@ -1,41 +1,45 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
+import Login from "./pages/login";
+import SignUp from "./pages/signup";
+import SendForm from "./pages/sendForm";
+
 function App() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [showSignUp, setShowSignUp] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const res = await fetch(`${process.env.REACT_APP_API_URI}/api/send`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, email }),
-    });
-
-    const data = await res.json();
-    console.log("Server response:", data);
-  };
+  useEffect(() => {
+    if (token) {
+      fetch(`${process.env.REACT_APP_API_URI}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+    }
+  }, [token]);
 
   return (
     <div className="App">
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <button type="submit">Submit</button>
-      </form>
+      {token ? (
+        <SendForm />
+      ) : (
+        <div>
+          <button onClick={() => setShowSignUp(true)}>Sign Up</button>
+          <button onClick={() => setShowSignUp(false)}>Conenct</button>
+          {showSignUp ? (
+            <SignUp setToken={setToken} />
+          ) : (
+            <Login setToken={setToken} />
+          )}
+        </div>
+      )}
+
+      {/* Footer */}
+      <div className="footer">
+        Fait par{" "}
+        <a href="https://github.com/Zakinane" target="_blank" rel="noreferrer">
+          Zakinane
+        </a>
+      </div>
     </div>
   );
 }
